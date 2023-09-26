@@ -1,15 +1,120 @@
+import os
 import time
+import json
 import azure.cognitiveservices.speech as speechsdk
 
 from elevenlabs import play, generate, set_api_key
     
+os.environ["SSL_CERT_DIR"]="/etc/ssl/certs"
 
-azure_speech_key = ""
-azure_region = "northeurope"
+class Preset(object):
+    preset = {
+        'file': {
+            'config': 'config.json'
+        }
+    }
 
-elevenlabs_api_key = ""
-elevenlabs_voice = "Adam"
+    def __init__(self):
+        self.file = self.File(self.preset['file'])
 
+    def __repr__(self):
+        return repr(self.preset)
+
+    class File(object):
+
+        def __init__(self, value):
+            self.file = value
+
+        def __repr__(self) -> str:
+            return repr(self.file)
+
+        @property
+        def config(self):
+            return self.file['config']
+        
+preset = Preset()
+
+
+class Config(object):
+    config_file = preset.file.config
+    config = None
+    
+    def __init__(self):
+        self.read()
+        self.azure = self.Azure(self.config['azure'])
+        self.elevenlabs = self.Elevenlabs(self.config['elevenlabs'])
+        
+    def __repr__(self):
+        return repr(self.config)
+    
+    class Azure(object):
+
+        def __init__(self, value):
+            self.azure = value
+
+        def __repr__(self):
+            return repr(self.azure)
+
+        @property
+        def speech_key(self):
+            return self.azure['speech_key']
+
+        @speech_key.setter
+        def speech_key(self, value):
+            self.azure['speech_key'] = value
+
+        @property
+        def region(self):
+            return self.azure['region']
+
+        @region.setter
+        def region(self, value):
+            self.azure['region'] = value
+        
+    class Elevenlabs(object):
+
+        def __init__(self, value):
+            self.elevenlabs = value
+
+        def __repr__(self):
+            return repr(self.elevenlabs)
+
+        @property
+        def api_key(self):
+            return self.elevenlabs['api_key']
+
+        @api_key.setter
+        def api_key(self, value):
+            self.elevenlabs['api_key'] = value
+
+        @property
+        def voice(self):
+            return self.elevenlabs['voice']
+
+        @voice.setter
+        def voice(self, value):
+            self.elevenlabs['voice'] = value
+    
+    
+    def write(self):
+        with open(self.config_file, "w") as outfile:
+            outfile.write(json.dumps(self.config, indent=4))
+            
+    def read(self):
+        if os.path.exists(self.config_file) == False or open(self.config_file, "r").read() == "":
+            self.write()
+        with open(self.config_file, "r") as openfile:
+            self.config = json.load(openfile)
+        return repr(self.config)
+
+config = Config()
+    
+    
+azure_speech_key = config.azure.speech_key
+azure_region = config.azure.region
+
+elevenlabs_api_key = config.elevenlabs.api_key
+elevenlabs_voice = config.elevenlabs.voice
 
 def realtime_recognize(_recognition_language="tr-TR", _target_language="en"):
     

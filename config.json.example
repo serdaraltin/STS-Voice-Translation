@@ -1,0 +1,10 @@
+{
+    "azure": {
+        "region": "",
+        "speech_key": ""
+    },
+    "elevenlabs": {
+        "api_key": "",
+        "voice": ""
+    }
+}
