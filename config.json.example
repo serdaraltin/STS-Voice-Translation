@@ -6,5 +6,12 @@
     "elevenlabs": {
         "api_key": "",
         "voice": ""
+    },
+    "setting": {
+        "input_device": "",
+        "input_language": "",
+        "output_device": "",
+        "target_language": "",
+        "voice_quality": ""
     }
 }
