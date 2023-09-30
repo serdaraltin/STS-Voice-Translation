@@ -13,23 +13,24 @@ logo_url = "./images/translation.png"
 st.set_page_config(layout="wide")
 
 css = '''
-<style>
-    .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
-    font-size:1.2rem;
-    margin-right:1rem;    
-    }
-    .column {
-   float: left;
-   width: 25%;
-   }
-   .row:after {
-   content: "";
-   display: table;
-   clear: both;
-   }
-    
-</style>
+   <style>
+      .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
+      font-size:1.2rem;
+      margin-right:1rem;    
+      }
+      .column {
+      float: left;
+      width: 25%;
+      }
+      .row:after {
+      content: "";
+      display: table;
+      clear: both;
+      }
+      
+   </style>
 '''
+
 st.markdown(css, unsafe_allow_html=True)
 
 tab_panel, tab_cloning, tab_info = st.tabs(["⚙️ Panel", "🎙️ Cloning", "ℹ️ Info"])
@@ -54,7 +55,7 @@ with st.sidebar:
                              <div class='column'><a href='https://www.digitales.com.tr'><img src='data:image/png;base64,{}' class='img-fluid' width=32></a></div>
                              </div>
                              <p style='margin-top:1rem;'>Copyright © 2023 by <a href='https://www.digitales.com.tr'>Digitales</a></p></div>""".format(img_to_bytes("./images/instagram.png"),img_to_bytes("./images/facebook.png"),img_to_bytes("./images/linkedin.png"),img_to_bytes("./images/youtube.png")), unsafe_allow_html=True)
-#panel tab
+
 with tab_panel:
    st.write()
 

@@ -5,6 +5,8 @@
     },
     "elevenlabs": {
         "api_key": "",
+        "cloned_voice": "",
+        "model": "",
         "voice": ""
     },
     "setting": {

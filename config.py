@@ -7,7 +7,9 @@ class Preset(object):
     preset = {
         'file': {
             "config": "config.json",
-            "logo": "./images/record2-fill.svg"
+            "logo": "./images/record2-fill.svg",
+            "virtual_input": "/tmp/transvoicemic",
+            "virtual_stream": "/tmp/stream_audio"
         }
     }
 
@@ -17,17 +19,29 @@ class Preset(object):
     def __repr__(self):
         return repr(self.preset)
 
-    class File(object):
 
+    class File(object):
         def __init__(self, value):
             self.file = value
 
-        def __repr__(self) -> str:
+        def __repr__(self):
             return repr(self.file)
-
+        
         @property
         def config(self):
             return self.file['config']
+        
+        @property
+        def logo(self):
+            return self.file['logo']
+        
+        @property
+        def virtual_input(self):
+            return self.file['virtual_input']
+        
+        @property
+        def virtual_stream(self):
+            return self.file['virtual_stream']
         
 preset = Preset()
 
@@ -140,6 +154,14 @@ class Config(object):
         @voice.setter
         def voice(self, value):
             self.elevenlabs['voice'] = value
+            
+        @property
+        def model(self):
+            return self.elevenlabs['model']
+
+        @model.setter
+        def model(self, value):
+            self.elevenlabs['model'] = value
     
     def write(self):
         with open(self.config_file, "w") as outfile:

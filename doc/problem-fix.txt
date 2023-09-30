@@ -1,0 +1,9 @@
+problem > x86_64-linux-gnu-gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -fPIC -I/usr/local/include -I/usr/include -I/usr/include/python3.10 -c src/pyaudio/device_api.c -o build/temp.linux-x86_64-3.10/src/pyaudio/device_api.o
+src/pyaudio/device_api.c:9:10: fatal error: portaudio.h: No such file or directory
+    9 | #include "portaudio.h"
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+error: command '/usr/bin/x86_64-linux-gnu-gcc' failed with exit code 1
+[end of output]
+
+solution > sudo apt -y install portaudio19-dev
