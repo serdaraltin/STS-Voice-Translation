@@ -123,7 +123,7 @@ async def text_to_speech():
                 except websockets.exceptions.ConnectionClosed:
                     print("Connection closed")
                     break
-        
+        await asyncio.sleep(.5)
 
 async def main():
 
