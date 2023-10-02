@@ -148,12 +148,12 @@ class Config(object):
             self.elevenlabs['api_key'] = value
 
         @property
-        def voice(self):
-            return self.elevenlabs['voice']
+        def voice_id(self):
+            return self.elevenlabs['voice_id']
 
-        @voice.setter
-        def voice(self, value):
-            self.elevenlabs['voice'] = value
+        @voice_id.setter
+        def voice_id(self, value):
+            self.elevenlabs['voice_id'] = value
             
         @property
         def model(self):

@@ -1,11 +1,10 @@
 
 import subprocess
 from config import config, preset
-from copy import copy
 
 class VirtualMic():
    
-    DEVICE_ID = None
+    DEVICE_ID = 0
     
     def __init__(self) -> None:
         pass
@@ -29,7 +28,7 @@ class VirtualMic():
         try:
             pactl_output = subprocess.check_output(pactl_load_module, stderr=subprocess.STDOUT, text=True)
             self.DEVICE_ID = pactl_output.strip().split()[-1]
-            print("Virtual Device Id: ", self.DEVICE_ID)
+            #print("Virtual Device Id: ", self.DEVICE_ID)
             return True, self.DEVICE_ID
         except subprocess.CalledProcessError as e:
             error_message = e.output
