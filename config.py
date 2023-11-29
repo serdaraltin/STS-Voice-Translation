@@ -51,10 +51,12 @@ class Config(object):
     config = None
     
     def __init__(self):
-        self.read()
+        self.load()
         self.setting = self.Setting(self.config['setting'])
+        self.aws = self.Aws(self.config['aws'])
         self.azure = self.Azure(self.config['azure'])
         self.elevenlabs = self.Elevenlabs(self.config['elevenlabs'])
+        self.deepgram = self.Deepgram(self.config['deepgram'])
         
     def __repr__(self):
         return repr(self.config)
@@ -82,14 +84,30 @@ class Config(object):
         @output_device.setter
         def output_device(self, value):
             self.setting['output_device'] = value
+            
+        @property
+        def record_quality(self):
+            return self.setting['record_quality']
+
+        @record_quality.setter
+        def record_quality(self, value):
+            self.setting['record_quality'] = value
         
         @property
-        def input_language(self):
-            return self.setting['input_language']
+        def source_language(self):
+            return self.setting['source_language']
 
-        @input_language.setter
-        def input_language(self, value):
-            self.setting['input_language'] = value
+        @source_language.setter
+        def source_language(self, value):
+            self.setting['source_language'] = value
+            
+        @property
+        def source_language_code(self):
+            return self.setting['source_language_code']
+
+        @source_language_code.setter
+        def source_language_code(self, value):
+            self.setting['source_language_code'] = value
             
         @property
         def target_language(self):
@@ -98,6 +116,22 @@ class Config(object):
         @target_language.setter
         def target_language(self, value):
             self.setting['target_language'] = value
+        
+        @property
+        def target_language_code(self):
+            return self.setting['target_language_code']
+
+        @target_language_code.setter
+        def target_language_code(self, value):
+            self.setting['target_language_code'] = value
+        
+        @property
+        def voice(self):
+            return self.setting['voice']
+
+        @voice.setter
+        def voice(self, value):
+            self.setting['voice'] = value
             
         @property
         def voice_quality(self):
@@ -106,7 +140,55 @@ class Config(object):
         @voice_quality.setter
         def voice_quality(self, value):
             self.setting['voice_quality'] = value
-    
+            
+        @property
+        def device_id(self):
+            return self.setting['device_id']
+
+        @device_id.setter
+        def device_id(self, value):
+            self.setting['device_id'] = value     
+            
+    class Aws(object):
+
+        def __init__(self, value):
+            self.aws = value
+
+        def __repr__(self):
+            return repr(self.aws)
+
+        @property
+        def access_key_id(self):
+            return self.aws['access_key_id']
+
+        @access_key_id.setter
+        def access_key_id(self, value):
+            self.aws['access_key_id'] = value
+
+        @property
+        def secret_access_key(self):
+            return self.aws['secret_access_key']
+
+        @secret_access_key.setter
+        def secret_access_key(self, value):
+            self.aws['secret_access_key'] = value
+            
+        @property
+        def region_name(self):
+            return self.aws['region_name']
+
+        @region_name.setter
+        def model(self, value):
+            self.aws['region_name'] = value
+        
+        @property
+        def region_name(self):
+            return self.aws['region_name']
+
+        @region_name.setter
+        def model(self, value):
+            self.aws['region_name'] = value
+            
     class Azure(object):
 
         def __init__(self, value):
@@ -163,13 +245,92 @@ class Config(object):
         def model(self, value):
             self.elevenlabs['model'] = value
     
-    def write(self):
+    class Deepgram(object):
+        def __init__(self, value) -> None:
+            self.deepgram = value
+        
+        def __repr__(self) -> str:
+            return repr(self.deepgram)
+        
+        @property
+        def api_key(self):
+            return self.deepgram['api_key']
+        
+        @api_key.setter
+        def apit_key(self, value):
+            self.deepgram['api_key'] = value
+            
+        @property
+        def language(self):
+            return self.deepgram['language']
+        
+        @language.setter
+        def language(self, value):
+            self.deepgram['language'] = value
+            
+        @property
+        def model(self):
+            return self.deepgram['model']
+        
+        @model.setter
+        def model(self, value):
+            self.deepgram['model'] = value
+            
+        @property
+        def host(self):
+            return self.deepgram['host']
+        
+        @host.setter
+        def host(self, value):
+            self.deepgram['host'] = value
+            
+        @property
+        def tier(self):
+            return self.deepgram['tier']
+        
+        @tier.setter
+        def tier(self, value):
+            self.deepgram['tier'] = value
+            
+        @property
+        def version(self):
+            return self.deepgram['version']
+        
+        @version.setter
+        def version(self, value):
+            self.deepgram['version'] = value
+            
+        @property
+        def panctuate(self):
+            return self.deepgram['panctuate']
+        
+        @panctuate.setter
+        def panctuate(self, value):
+            self.deepgram['panctuate'] = value
+            
+        @property
+        def encoding(self):
+            return self.deepgram['encoding']
+        
+        @encoding.setter
+        def encoding(self, value):
+            self.deepgram['encoding'] = value
+        
+        @property
+        def sample_rate(self):
+            return self.deepgram['sample_rate']
+        
+        @sample_rate.setter
+        def sample_rate(self, value):
+            self.deepgram['sample_rate'] = value
+            
+    def save(self):
         with open(self.config_file, "w") as outfile:
             outfile.write(json.dumps(self.config, indent=4))
             
-    def read(self):
+    def load(self):
         if os.path.exists(self.config_file) == False or open(self.config_file, "r").read() == "":
-            self.write()
+            pass
         with open(self.config_file, "r") as openfile:
             self.config = json.load(openfile)
         return repr(self.config)

@@ -34,11 +34,12 @@ class VirtualMic():
             error_message = e.output
             return False, error_message
         
-    def unload_device(self):
+    def unload_device(self, _device_id=DEVICE_ID):
+        
         pactl_unload_module = [
             'pactl',
             'unload-module',
-            '{}'.format(self.DEVICE_ID)
+            '{}'.format(_device_id)
         ]
         
         try:

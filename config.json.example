@@ -1,19 +1,36 @@
 {
+    "aws": {
+        "access_key_id": "",
+        "secret_access_key": "",
+        "region_name": "eu-north-1"
+    },
     "azure": {
-        "region": "",
+        "region": "northeurope",
         "speech_key": ""
+    },
+    "deepgram": {
+        "api_key": "",
+        "host": "wss://api.deepgram.com",
+        "version": "v1",
+        "panctuate": "true",
+        "language": "tr",
+        "model": "general",
+        "tier": "base",
+        "encoding": "linear16",
+        "sample_rate": "16000"
     },
     "elevenlabs": {
         "api_key": "",
         "cloned_voice": "",
-        "model": "",
-        "voice": ""
+        "model": "eleven_multilingual_v2",
+        "voice_id": "21m00Tcm4TlvDq8ikWAM"
     },
     "setting": {
+        "device_id": "30",
         "input_device": "",
-        "input_language": "",
-        "output_device": "",
-        "target_language": "",
+        "input_language": "tr",
+        "output_device": "Transvoice-Mic",
+        "target_language": "en",
         "voice_quality": ""
     }
 }

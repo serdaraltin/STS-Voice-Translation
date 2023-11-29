@@ -164,3 +164,17 @@ cython_debug/
 .directory
 
 config.json
+
+.idea/
+
+data.json
+
+models.json
+
+test.py
+
+error.txt
+
+voices.json
+
+STS-Voice-Translation.code-workspace
