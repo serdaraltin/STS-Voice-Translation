@@ -1,0 +1,66 @@
+- background 
+
+# set_png_as_page_bg("images/background.jpg")
+
+# st.markdown(
+#     f"""
+#      <style>
+#      .stApp {{
+#          background: url(data:image/bacground.jpg;base64,{base64.b64encode(open("./images/background.jpg", "rb").read()).decode()});
+#          background-repeat: no-repeat;
+#          background-position: center;
+#          width: 100%;
+#          height: 100%;
+#          background-color: black;
+#          background-size: cover;
+#      }}
+#      </style>
+#      """,
+#     unsafe_allow_html=True,
+# )
+
+# --------------------------------------------------------------
+# personal_details = st.markdown(
+#    "<p style='text-align: left; color: gray;'>Personal Details</p>",
+#    unsafe_allow_html=True,
+# )
+# --------------------------------------------------------------
+# title_settings = st.markdown(
+#    "<p style='text-align: left; color: gray;'>Settings</p>", unsafe_allow_html=True
+# )
+
+
+# st.set_page_config(layout="wide")
+
+
+
+css = """
+   <style>
+      .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
+      font-size:1.2rem;
+      margin-right:1rem;    
+      }
+      .column {
+      float: left;
+      width: 25%;
+      }
+      .row:after {
+      content: "";
+      display: table;
+      clear: both;
+      }
+      div[data-baseweb="select"] > div {
+      background-color: rgba(255,255,255,0.4);
+      }
+      div[role="listbox"] ul {
+      background-color: red;
+      }
+   </style>
+"""
+
+# st.markdown(css, unsafe_allow_html=True)
+
+  # title_add_voice = st.markdown(
+    #    "<p style='text-align: left; color: gray;'>Add Voice</p>",
+    #    unsafe_allow_html=True,
+    # )

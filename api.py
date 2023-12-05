@@ -48,7 +48,6 @@ class Api(object):
     def __repr__(self):
         return repr(self.api)
 
-    
     class Deepgram(object):
         def __init__(self, value):
             self.deepgram = value
@@ -63,7 +62,7 @@ class Api(object):
         @host.setter
         def host(self, value):
             self.deepgram["host"] = value
-            
+
         @property
         def version(self):
             return self.deepgram["version"]
@@ -86,7 +85,7 @@ class Api(object):
         @supported_languages.setter
         def supported_languages(self, value):
             self.aws_translate["supported_languages"] = value
-        
+
         @property
         def languages(self):
             return self.aws_translate["supported_languages"].keys()
@@ -129,14 +128,14 @@ class Api(object):
         @voices.setter
         def voices(self, value):
             self.elevenlabs["voices"] = value
-        
+
         @property
         def voice_names(self):
             voices = []
             for voice in self.elevenlabs["voices"]:
                 voices.append(voice["name"])
             return voices
-        
+
         @property
         def models(self):
             models_url = urljoin(self.url + "/", "models")
@@ -157,8 +156,8 @@ class Api(object):
             elements = []
             elements.append("Auto")
             for element in self.elevenlabs["models"]:
-                _eleven = re.search('Eleven', element["name"])
-                elements.append(element["name"][_eleven.end():])
+                _eleven = re.search("Eleven", element["name"])
+                elements.append(element["name"][_eleven.end() :])
             return elements
 
         @property
@@ -168,6 +167,28 @@ class Api(object):
         @output_format.setter
         def output_format(self, value):
             self.elevenlabs["output_format"] = value
+
+        def voice_add(self):
+            voices_url = urljoin(self.url + "/", "voices")
+            voices_url = urljoin(voices_url + "/", "add")
+
+            headers = {
+                "xi-api-key": config.elevenlabs.api_key
+                
+            }
+            files = {'file': open('/home/main/Project/STS-Voice-Translation/samples/audios/tr-masal.mp3', 'rb')}
+            form_data = {
+               "name": "Test1",
+               "description": "Test11",
+               "files": files
+            }
+            response = requests.request(
+                method="POST",url=voices_url, data=form_data, headers=headers).text
+            try:
+                response = json.loads(response)["voice_id"]
+            except:
+                pass
+            return response
 
     def save(self):
         with open(self.api_file, "w") as outfile:
